@@ -29,9 +29,9 @@
 			angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope){
 				$scope.app = "Lista Telefonica";
 				$scope.contatos = [
-					{nome: "Pedro", telefone: "999998888"},
-					{nome: "Ana", telefone: "999998888"},
-					{nome: "Maria", telefone: "999998888"}
+					{nome: "Pedro", telefone: "999998888", cor: "blue"},
+					{nome: "Ana", telefone: "999998888", cor: "yellow"},
+					{nome: "Maria", telefone: "999998888", cor: "red"}
 				];
 				$scope.operadoras = [
 					{nome: "Oi", codigo: 14, categoria: "Celular"},
@@ -61,20 +61,20 @@
 		<div class="jumbotron">
 			<!--<h4 ng-bind="app"></h4> -->
 			<h3>{{app}}</h3>
-			<table class="table">
+			<table ng-show="contatos.length > 0" class="table">
 				<tr>
 					<th></th>
 					<th>Nome</th>
 					<th>Telefone</th>
 					<th>Operadora</th>
-					<th>Categoria</th>
+					<th></th>
 				</tr>
 				<tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos">			
 					<td><input type="checkbox" ng-model="contato.selecionado" /></td>		 
 					<td>{{contato.nome}}</td>
 					<td>{{contato.telefone}}</td>
-					<td>{{contato.operadora.nome}}</td>					
-					<td>{{contato.operadora.categoria}}</td>	
+					<td>{{contato.operadora.nome}}</td>	
+					<td><div style="width: 20px; height: 20px;" ng-style="{'background-color': contato.cor}"></div></td>	
 					<!--
 					<td ng-repeat="(key,value) in contato">
 						{{value}}
@@ -89,7 +89,8 @@
 				<option value="">Selecione uma operadora</option>
 			</select>
 			<button class="btn btn-primary btn-block" ng-disabled="!contato.nome || !contato.telefone" ng-click="adicionarContato(contato)">Adicionar Contato</button>
-			<button class="btn btn-danger btn-block" ng-disabled="!isContatoSelecionado(contatos)" ng-click="apagarContatos(contatos)">Apagar Contato</button>
+			<button class="btn btn-danger btn-block" ng-show="isContatoSelecionado(contatos)" ng-click="apagarContatos(contatos)">Apagar Contato</button>
 		</div>
+		<div ng-include="'footer.html'"></div>
 	</body>
 </html>
