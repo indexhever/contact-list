@@ -1,0 +1,5 @@
+$scope.contatos = [
+	{nome: $filter('uppercase')("Pedro"), telefone: "999998888", data: new Date(), cor: "blue"},
+	{nome: "Ana", telefone: "999998888", data: new Date(), cor: "yellow"},
+	{nome: "Maria", telefone: "999998888", data: new Date(), cor: "red"}
+];
